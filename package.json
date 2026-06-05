@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-site",
+  "private": true,
+  "scripts": {
+    "build": "babel site --extensions .jsx --out-dir site/compiled --presets @babel/preset-react",
+    "watch": "babel site --extensions .jsx --out-dir site/compiled --presets @babel/preset-react --watch"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-react": "^7.29.7"
+  }
+}

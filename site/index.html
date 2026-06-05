@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>John Besco — Front-end developer, growth marketer & AI workflow builder</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<!-- Self-hosted primary fonts -->
+<style>
+  @font-face {
+    font-family: 'Cabinet Grotesk';
+    src: url('fonts/CabinetGrotesk-Variable.woff2') format('woff2'),
+         url('fonts/CabinetGrotesk-Variable.woff') format('woff');
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Bricolage Grotesque';
+    src: url('fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+  }
+</style>
+<!-- Alternate faces for Tweaks panel options -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Instrument+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  /* Tweakable tokens — the Tweaks panel rewrites these live. */
+  :root {
+    --accent: #92D0FC;
+    --accent-90: color-mix(in srgb, var(--accent) 90%, transparent);
+    --accent-30: color-mix(in srgb, var(--accent) 30%, transparent);
+    --accent-20: color-mix(in srgb, var(--accent) 20%, transparent);
+    --accent-10: color-mix(in srgb, var(--accent) 10%, transparent);
+    --color-primary: var(--accent);
+    --accent-fg: var(--accent);
+    --hero-glow-opacity: 1;
+    /* Neutral tokens — dark defaults */
+    --bg-base: #0F0F0F;
+    --bg-base-rgb: 15,15,15;
+    --bg-card: #161616;
+    --bg-card-alt: #111111;
+    --bg-raised: #1A1A1A;
+    --border-subtle: #1E1E1E;
+    --border: #2A2A2A;
+    --border-active: #363636;
+    --text-primary: #ffffff;
+    --text-secondary: #A3A3A3;
+    --text-tertiary: #909090;
+    --text-muted: #838383;
+    --text-faint: #828282;
+    --dot-grid: rgba(255,255,255,0.07);
+    --grid-line: rgba(255,255,255,0.04);
+    --badge-bg: #1A1A1A;
+    --badge-text: #A3A3A3;
+    --badge-border: #2A2A2A;
+    --color-success: #34D399;
+  }
+  html[data-theme="light"] {
+    --bg-base: #F7F7F5;
+    --bg-base-rgb: 247,247,245;
+    --bg-card: #FFFFFF;
+    --bg-card-alt: #F2F2F0;
+    --bg-raised: #EBEBEA;
+    --border-subtle: #E0E0DE;
+    --border: #D0D0CE;
+    --border-active: #B8B8B6;
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --accent-fg: #1565BB;
+    --text-tertiary: #636363;
+    --text-muted: #6B6B6B;
+    --text-faint: #717171;
+    --dot-grid: rgba(0,0,0,0.06);
+    --grid-line: rgba(0,0,0,0.05);
+    --hero-glow-opacity: 0.6;
+    --badge-bg: rgba(0,0,0,0.08);
+    --badge-text: #222222;
+    --badge-border: rgba(0,0,0,0.15);
+  }
+  html[data-theme] * { transition: background-color 240ms ease, border-color 240ms ease, color 200ms ease; }
+  /* Keyboard focus ring — visible only on keyboard nav, never on mouse */
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  /* Even line breaks on headings */
+  h1, h2, h3 { text-wrap: balance; }
+  #scroll-root {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--bg-base);
+    background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .layout {
+    display: flex;
+    gap: 48px;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 32px;
+    align-items: flex-start;
+  }
+  .content { flex: 1; min-width: 0; max-width: 780px; }
+  /* Full-bleed sections (hero + about): span the whole scroll width so the
+     glow has no seam and the nav is absent here. */
+  .fullbleed { width: 100%; }
+  .fullbleed-inner { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+  /* Background-style variants (Tweaks › Background) */
+  #scroll-root[data-bg="solid"] { background-image: none; }
+  #scroll-root[data-bg="grid"] {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  /* hide scrollbar chrome but keep scroll */
+  #scroll-root::-webkit-scrollbar { width: 10px; }
+  #scroll-root::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+  .hb { -webkit-tap-highlight-color: transparent; }
+  .hb:active .hb-border { transform: scale(0.975); }
+
+  /* Hero ambient glow — drifting blurred blobs (base layer under the video) */
+  .hero-blob {
+    position: absolute; border-radius: 50%; filter: blur(72px);
+    mix-blend-mode: screen; will-change: transform; pointer-events: none;
+  }
+  .hero-blob.b1 { width: 46vw; height: 46vw; left: -4%; top: 2%;
+    background: radial-gradient(circle, rgba(146,208,252,0.85), transparent 64%);
+    animation: heroDrift1 19s ease-in-out infinite; }
+  .hero-blob.b2 { width: 40vw; height: 40vw; right: -6%; top: -6%;
+    background: radial-gradient(circle, rgba(91,141,239,0.8), transparent 64%);
+    animation: heroDrift2 23s ease-in-out infinite; }
+  .hero-blob.b3 { width: 32vw; height: 32vw; left: 28%; bottom: -14%;
+    background: radial-gradient(circle, rgba(157,140,255,0.7), transparent 64%);
+    animation: heroDrift3 27s ease-in-out infinite; }
+  @keyframes heroDrift1 {
+    0%,100% { transform: translate(-8%,-4%) scale(1); }
+    50%     { transform: translate(12%,10%) scale(1.18); }
+  }
+  @keyframes heroDrift2 {
+    0%,100% { transform: translate(6%,4%) scale(1.05); }
+    50%     { transform: translate(-12%,-8%) scale(0.92); }
+  }
+  @keyframes heroDrift3 {
+    0%,100% { transform: translate(0,6%) scale(0.95); }
+    50%     { transform: translate(-10%,-6%) scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* Stop all CSS animations and transitions — covers blobs, pulse dot, MobileNav, etc. */
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  /* Pill dock (880–1440px): add bottom clearance so last-section content
+     isn't obscured by the floating nav (~34px pill + 24px offset = ~80px) */
+  @media (min-width: 881px) and (max-width: 1439px) {
+    #scroll-root { padding-bottom: 80px; }
+  }
+  @media (max-width: 880px) {
+    .layout aside { display: none !important; }
+    .layout { gap: 0; padding: 0 20px; }
+    .fullbleed-inner { padding: 0 20px; }
+    /* Push scroll content above the fixed MobileNav bar (~68px) */
+    #scroll-root { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+  }
+</style>
+</head>
+<body>
+  <!-- Snake-trail canvas: mix-blend-mode:screen so it glows on dark bg, invisible on light content -->
+  <canvas id="snake-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;mix-blend-mode:screen;z-index:100;"></canvas>
+  <div id="root"></div>
+
+  <!-- Apply stored theme before React renders — prevents inline var() baking dark colors in light mode -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+
+  <!-- React + ReactDOM production UMD (~136KB total, CDN-cached after first visit) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <!-- HLS only needed for hero bg video — defer so it never blocks first paint -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js" defer></script>
+  <script src="snake-bg.js" defer></script>
+
+  <!-- Pre-compiled components. Edit .jsx files then run `npm run build` to update. -->
+  <script src="compiled/ui.js?v=6"></script>
+  <script src="compiled/Sidebar.js?v=5"></script>
+  <script src="compiled/Hero.js?v=5"></script>
+  <script src="compiled/About.js?v=5"></script>
+  <script src="compiled/AICapabilities.js?v=5"></script>
+  <script src="compiled/Experience.js?v=5"></script>
+  <script src="compiled/Projects.js?v=9"></script>
+  <script src="compiled/Skills.js?v=5"></script>
+  <script src="compiled/Contact.js?v=5"></script>
+  <script src="compiled/ThemeToggle.js?v=5"></script>
+  <script src="compiled/MobileNav.js?v=5"></script>
+  <script src="compiled/App.js?v=5"></script>
+</body>
+</html>

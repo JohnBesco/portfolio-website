@@ -1,0 +1,20 @@
+# Mac
+.DS_Store
+
+# Claude session data — never push this
+.claude/
+
+# Node
+node_modules/
+
+# Font zips and raw design files — not needed in repo
+*.zip
+CabinetGrotesk_Complete/
+CabinetGrotesk_Complete 2/
+design_handoff_portfolio_site/
+Portfolio Design System.zip
+
+# Build tool config (optional to exclude, not sensitive)
+# babel.config.json
+# package.json
+# package-lock.json
