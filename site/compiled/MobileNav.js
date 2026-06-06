@@ -39,7 +39,15 @@ function MobileNav() {
   const [active, setActive] = useStateMN('hero');
   const [bp, setBp] = useStateMN(() => getBreakpoint());
   useEffectMN(() => {
-    const check = () => setBp(getBreakpoint());
+    var pending = false;
+    const check = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => {
+        setBp(getBreakpoint());
+        pending = false;
+      });
+    };
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);

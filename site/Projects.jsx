@@ -70,7 +70,7 @@ const AI_BRAIN = {
     'Knowledge graph and wiki index for fast cross-project lookup',
   ],
   tags: ['Claude Code', 'Skills Building', 'RAG Systems', 'MCP Integrations', 'Multi-Agent Workflows', 'Automations'],
-  url: '#',
+  url: null,
   live: 'Private system',
   repo: null,
 };
@@ -158,7 +158,7 @@ function FeaturedProjectCard({ p }) {
 
           {/* Tags */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {p.tags.map((t) => <Badge key={t} variant="primary">{t}</Badge>)}
+            {(p.tags || []).map((t) => <Badge key={t} variant="primary">{t}</Badge>)}
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ function FeaturedProjectCard({ p }) {
 function ClientFeaturedCard({ p }) {
   var [hover, setHover] = React.useState(false);
   var mobile = useMobile();
-  var isLive = p.url && p.url !== '#';
+  var isLive = Boolean(p.url);
   return (
     <Reveal variant="scale" style={{ marginBottom: 20 }}>
       <div
@@ -237,7 +237,7 @@ function ClientFeaturedCard({ p }) {
           minWidth: mobile ? 'auto' : 200,
         }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: mobile ? 'flex-start' : 'flex-end' }}>
-            {p.tags.map((t) => <Badge key={t}>{t}</Badge>)}
+            {(p.tags || []).map((t) => <Badge key={t}>{t}</Badge>)}
           </div>
           {isLive ? (
             <a href={p.url} target="_blank" rel="noreferrer"
@@ -257,7 +257,7 @@ function ClientFeaturedCard({ p }) {
 
 function ProjectCard({ p, i }) {
   const [hover, setHover] = React.useState(false);
-  const isLive = p.url && p.url !== '#';
+  const isLive = Boolean(p.url);
   return (
     <Reveal delay={Math.min(i, 4) * 70} variant="scale">
       <Card
@@ -311,7 +311,7 @@ function ProjectCard({ p, i }) {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '18px 0 0' }}>
-            {p.tags.map((t) => <Badge key={t}>{t}</Badge>)}
+            {(p.tags || []).map((t) => <Badge key={t}>{t}</Badge>)}
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginTop: 'auto', paddingTop: 18 }}>

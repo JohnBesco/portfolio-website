@@ -56,7 +56,7 @@ const AI_BRAIN = {
   desc: 'A structured Claude + Obsidian operating system for planning, context management, reusable skills, and session handoff — built as a personal second brain and delivery OS.',
   features: ['50+ reusable Claude skills across dev, marketing, and content workflows', 'Project-level context files, operating rules, and memory layers', 'Session handoff flows that keep work coherent across conversations', 'Custom hooks, cron triggers, and structured delivery SOPs', 'Knowledge graph and wiki index for fast cross-project lookup'],
   tags: ['Claude Code', 'Skills Building', 'RAG Systems', 'MCP Integrations', 'Multi-Agent Workflows', 'Automations'],
-  url: '#',
+  url: null,
   live: 'Private system',
   repo: null
 };
@@ -191,7 +191,7 @@ function FeaturedProjectCard({
       flexWrap: 'wrap',
       gap: 8
     }
-  }, p.tags.map(t => /*#__PURE__*/React.createElement(Badge, {
+  }, (p.tags || []).map(t => /*#__PURE__*/React.createElement(Badge, {
     key: t,
     variant: "primary"
   }, t))))));
@@ -201,7 +201,7 @@ function ClientFeaturedCard({
 }) {
   var [hover, setHover] = React.useState(false);
   var mobile = useMobile();
-  var isLive = p.url && p.url !== '#';
+  var isLive = Boolean(p.url);
   return /*#__PURE__*/React.createElement(Reveal, {
     variant: "scale",
     style: {
@@ -313,7 +313,7 @@ function ClientFeaturedCard({
       gap: 8,
       justifyContent: mobile ? 'flex-start' : 'flex-end'
     }
-  }, p.tags.map(t => /*#__PURE__*/React.createElement(Badge, {
+  }, (p.tags || []).map(t => /*#__PURE__*/React.createElement(Badge, {
     key: t
   }, t))), isLive ? /*#__PURE__*/React.createElement("a", {
     href: p.url,
@@ -350,7 +350,7 @@ function ProjectCard({
   i
 }) {
   const [hover, setHover] = React.useState(false);
-  const isLive = p.url && p.url !== '#';
+  const isLive = Boolean(p.url);
   return /*#__PURE__*/React.createElement(Reveal, {
     delay: Math.min(i, 4) * 70,
     variant: "scale"
@@ -444,7 +444,7 @@ function ProjectCard({
       gap: 8,
       margin: '18px 0 0'
     }
-  }, p.tags.map(t => /*#__PURE__*/React.createElement(Badge, {
+  }, (p.tags || []).map(t => /*#__PURE__*/React.createElement(Badge, {
     key: t
   }, t))), /*#__PURE__*/React.createElement("div", {
     style: {

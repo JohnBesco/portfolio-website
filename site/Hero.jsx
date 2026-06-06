@@ -17,13 +17,14 @@ function useScramble(texts, pauseMs) {
 
     var idx = 0;
     var timer;
+    var iv;
 
     function scrambleTo(target, done) {
       var DURATION = 0.65;
       var SPEED = 0.030;
       var steps = Math.round(DURATION / SPEED);
       var step = 0;
-      var iv = setInterval(function () {
+      iv = setInterval(function () {
         var progress = step / steps;
         var out = '';
         for (var i = 0; i < target.length; i++) {
@@ -45,7 +46,7 @@ function useScramble(texts, pauseMs) {
     }
 
     timer = setTimeout(cycle, pauseMs);
-    return function () { clearTimeout(timer); };
+    return function () { clearTimeout(timer); clearInterval(iv); };
   }, []);
 
   return { display: display, activeIdx: activeIdx };
