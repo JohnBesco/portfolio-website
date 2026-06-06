@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://johnbesco-dev.co.uk/sitemap.xml
