@@ -501,13 +501,13 @@ function TweakColor({ label, value, options, onChange }) {
   return (
     <TweakRow label={label}>
       <div className="twk-chips" role="radiogroup">
-        {options.map((o, i) => {
+        {options.map((o) => {
           const colors = Array.isArray(o) ? o : [o];
           const [hero, ...rest] = colors;
           const sup = rest.slice(0, 4);
           const on = key(o) === cur;
           return (
-            <button key={i} type="button" className="twk-chip" role="radio"
+            <button key={hero} type="button" className="twk-chip" role="radio"
                     aria-checked={on} data-on={on ? '1' : '0'}
                     aria-label={colors.join(', ')} title={colors.join(' · ')}
                     style={{ background: hero }}

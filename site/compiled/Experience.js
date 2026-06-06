@@ -179,7 +179,7 @@ function RoleBlock({
       flexDirection: 'column',
       gap: 7
     }
-  }, role.points.map((p, k) => /*#__PURE__*/React.createElement("li", {
+  }, (role.points || []).map((p, k) => /*#__PURE__*/React.createElement("li", {
     key: k,
     style: {
       display: 'flex',
@@ -202,7 +202,7 @@ function RoleBlock({
       flexWrap: 'wrap',
       gap: 8
     }
-  }, role.tags.map(t => /*#__PURE__*/React.createElement(Badge, {
+  }, (role.tags || []).map(t => /*#__PURE__*/React.createElement(Badge, {
     key: t
   }, t))), role.testimonial && /*#__PURE__*/React.createElement(TestimonialCard, {
     t: role.testimonial

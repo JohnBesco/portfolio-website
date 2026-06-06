@@ -111,7 +111,7 @@ function RoleBlock({ role, i }) {
         </div>
 
         <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 7 }}>
-          {role.points.map((p, k) => (
+          {(role.points || []).map((p, k) => (
             <li key={k} style={{ display: 'flex', gap: 10, fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--text-tertiary)', lineHeight: 1.55 }}>
               <span aria-hidden="true" style={{ color: 'var(--accent-fg)', flex: 'none', marginTop: 1 }}>—</span>{p}
             </li>
@@ -119,7 +119,7 @@ function RoleBlock({ role, i }) {
         </ul>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          {role.tags.map((t) => <Badge key={t}>{t}</Badge>)}
+          {(role.tags || []).map((t) => <Badge key={t}>{t}</Badge>)}
         </div>
 
         {role.testimonial && <TestimonialCard t={role.testimonial} />}

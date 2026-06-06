@@ -55,7 +55,7 @@ function Contact() {
               <Button variant="primary" href="mailto:johnbesco.dev@gmail.com">
                 Get in touch <Icon name="arrowRight" size={16} color="currentColor" />
               </Button>
-              <Button variant="secondary" href="https://uk.linkedin.com/in/john-besco" target="_blank">
+              <Button variant="secondary" href="https://uk.linkedin.com/in/john-besco" target="_blank" rel="noopener noreferrer">
                 <Icon name="linkedin" size={16} color="var(--text-secondary)" />LinkedIn
               </Button>
             </div>

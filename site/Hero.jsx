@@ -70,7 +70,7 @@ function Hero({ layout = 'split' }) {
       hls.loadSource(HERO_GLOW_SRC);
       hls.attachMedia(v);
     }
-    var play = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    var play = function () { var p = v.play(); if (p && p.catch) p.catch(function (e) { console.warn('Hero video autoplay blocked:', e); }); };
     v.addEventListener('canplay', play, { once: true });
     return function () { if (hls) hls.destroy(); };
   }, []);

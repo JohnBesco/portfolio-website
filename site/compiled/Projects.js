@@ -168,7 +168,7 @@ function FeaturedProjectCard({
       flexDirection: 'column',
       gap: 8
     }
-  }, p.features.map(f => /*#__PURE__*/React.createElement("li", {
+  }, (p.features || []).map(f => /*#__PURE__*/React.createElement("li", {
     key: f,
     style: {
       display: 'flex',
@@ -201,6 +201,7 @@ function ClientFeaturedCard({
 }) {
   var [hover, setHover] = React.useState(false);
   var mobile = useMobile();
+  var isLive = p.url && p.url !== '#';
   return /*#__PURE__*/React.createElement(Reveal, {
     variant: "scale",
     style: {
@@ -245,7 +246,7 @@ function ClientFeaturedCard({
       transition: 'opacity 300ms',
       background: 'linear-gradient(135deg, color-mix(in srgb, var(--accent) 4%, transparent), transparent 55%)'
     }
-  }), /*#__PURE__*/React.createElement("a", {
+  }), isLive && /*#__PURE__*/React.createElement("a", {
     href: p.url,
     target: "_blank",
     rel: "noreferrer",
@@ -314,7 +315,7 @@ function ClientFeaturedCard({
     }
   }, p.tags.map(t => /*#__PURE__*/React.createElement(Badge, {
     key: t
-  }, t))), /*#__PURE__*/React.createElement("a", {
+  }, t))), isLive ? /*#__PURE__*/React.createElement("a", {
     href: p.url,
     target: "_blank",
     rel: "noreferrer",
@@ -332,7 +333,17 @@ function ClientFeaturedCard({
     name: "externalLink",
     size: 14,
     color: "currentColor"
-  }), p.live))));
+  }), p.live) : /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 6,
+      fontFamily: 'var(--font-body)',
+      fontSize: 13,
+      fontWeight: 500,
+      color: 'var(--text-muted)'
+    }
+  }, p.live))));
 }
 function ProjectCard({
   p,

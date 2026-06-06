@@ -13,12 +13,20 @@ const MN_NAV = [
   { id: 'contact',    label: 'Contact',    icon: 'mail'      },
 ];
 
+function getBreakpoint() {
+  if (typeof window === 'undefined') return 'hidden';
+  var w = window.innerWidth;
+  if (w < 880) return 'phone';
+  if (w < 1440) return 'pill';
+  return 'hidden';
+}
+
 function MobileNav() {
   const [active, setActive] = useStateMN('hero');
-  const [width, setWidth] = useStateMN(window.innerWidth);
+  const [bp, setBp] = useStateMN(() => getBreakpoint());
 
   useEffectMN(() => {
-    const check = () => setWidth(window.innerWidth);
+    const check = () => setBp(getBreakpoint());
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
@@ -52,9 +60,9 @@ function MobileNav() {
   };
 
   /* Sidebar handles ≥ 1440px */
-  if (width >= 1440) return null;
+  if (bp === 'hidden') return null;
 
-  const isMobile = width < 880;
+  const isMobile = bp === 'phone';
 
   /* ── Phone mode: full-width frosted bottom bar ────────────── */
   if (isMobile) {

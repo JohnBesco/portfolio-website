@@ -136,8 +136,9 @@
   }
 
   var lastTick = 0;
+  var rafHandle = 0;
   function loop(now) {
-    requestAnimationFrame(loop);
+    rafHandle = requestAnimationFrame(loop);
     if (now - lastTick >= TICK_MS) {
       for (var i = 0; i < snakes.length; i++) stepSnake(snakes[i]);
       lastTick = now;
@@ -147,5 +148,15 @@
 
   // Don't run canvas animation when user prefers reduced motion
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  requestAnimationFrame(loop);
+  rafHandle = requestAnimationFrame(loop);
+
+  // Pause when tab is hidden, resume on return
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      cancelAnimationFrame(rafHandle);
+    } else {
+      lastTick = 0;
+      rafHandle = requestAnimationFrame(loop);
+    }
+  });
 })();

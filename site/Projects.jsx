@@ -149,7 +149,7 @@ function FeaturedProjectCard({ p }) {
 
           {/* Feature bullets */}
           <ul style={{ margin: '0 0 20px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {p.features.map((f) => (
+            {(p.features || []).map((f) => (
               <li key={f} style={{ display: 'flex', gap: 10, fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
                 <span aria-hidden="true" style={{ color: 'var(--accent-fg)', flexShrink: 0, marginTop: 1 }}>—</span>{f}
               </li>
@@ -169,6 +169,7 @@ function FeaturedProjectCard({ p }) {
 function ClientFeaturedCard({ p }) {
   var [hover, setHover] = React.useState(false);
   var mobile = useMobile();
+  var isLive = p.url && p.url !== '#';
   return (
     <Reveal variant="scale" style={{ marginBottom: 20 }}>
       <div
@@ -203,12 +204,14 @@ function ClientFeaturedCard({ p }) {
           background: 'linear-gradient(135deg, color-mix(in srgb, var(--accent) 4%, transparent), transparent 55%)',
         }} />
         {/* Arrow icon top-right */}
-        <a href={p.url} target="_blank" rel="noreferrer" aria-label={`Open ${p.name}`}
-          style={{ position: 'absolute', top: 18, right: 20, zIndex: 2, display: 'inline-flex',
-            color: hover ? 'var(--accent-fg)' : 'var(--text-muted)', transition: 'color 160ms',
-            padding: 6, margin: -6 }}>
-          <Icon name="arrowUpRight" size={18} color="currentColor" />
-        </a>
+        {isLive && (
+          <a href={p.url} target="_blank" rel="noreferrer" aria-label={`Open ${p.name}`}
+            style={{ position: 'absolute', top: 18, right: 20, zIndex: 2, display: 'inline-flex',
+              color: hover ? 'var(--accent-fg)' : 'var(--text-muted)', transition: 'color 160ms',
+              padding: 6, margin: -6 }}>
+            <Icon name="arrowUpRight" size={18} color="currentColor" />
+          </a>
+        )}
 
         {/* Left: meta + title + description */}
         <div style={{ position: 'relative', zIndex: 1, flex: 1, minWidth: 0 }}>
@@ -236,10 +239,16 @@ function ClientFeaturedCard({ p }) {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: mobile ? 'flex-start' : 'flex-end' }}>
             {p.tags.map((t) => <Badge key={t}>{t}</Badge>)}
           </div>
-          <a href={p.url} target="_blank" rel="noreferrer"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 500, color: 'var(--accent-fg)', textDecoration: 'none' }}>
-            <Icon name="externalLink" size={14} color="currentColor" />{p.live}
-          </a>
+          {isLive ? (
+            <a href={p.url} target="_blank" rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 500, color: 'var(--accent-fg)', textDecoration: 'none' }}>
+              <Icon name="externalLink" size={14} color="currentColor" />{p.live}
+            </a>
+          ) : (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 500, color: 'var(--text-muted)' }}>
+              {p.live}
+            </span>
+          )}
         </div>
       </div>
     </Reveal>

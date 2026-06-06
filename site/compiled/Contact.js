@@ -78,7 +78,8 @@ function Contact() {
   })), /*#__PURE__*/React.createElement(Button, {
     variant: "secondary",
     href: "https://uk.linkedin.com/in/john-besco",
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "linkedin",
     size: 16,

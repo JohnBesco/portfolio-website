@@ -605,13 +605,13 @@ function TweakColor({
   }, /*#__PURE__*/React.createElement("div", {
     className: "twk-chips",
     role: "radiogroup"
-  }, options.map((o, i) => {
+  }, options.map(o => {
     const colors = Array.isArray(o) ? o : [o];
     const [hero, ...rest] = colors;
     const sup = rest.slice(0, 4);
     const on = key(o) === cur;
     return /*#__PURE__*/React.createElement("button", {
-      key: i,
+      key: hero,
       type: "button",
       className: "twk-chip",
       role: "radio",
