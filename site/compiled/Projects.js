@@ -30,8 +30,8 @@ const CLIENT_PROJECTS = [{
   meta: 'LOCAL BUSINESS · BOOKING',
   desc: 'Booking-led site for a massage therapist. Local SEO plus a simple enquiry flow that fills the calendar. Built and maintained in WordPress.',
   tags: ['WordPress', 'Local SEO'],
-  url: 'https://essentialmassagefb.co.uk/',
-  live: 'essentialmassagefb.co.uk',
+  url: 'https://essentialmassage.uk/',
+  live: 'essentialmassage.uk',
   repo: null
 }, {
   name: 'Bull Solana',
