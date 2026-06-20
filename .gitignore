@@ -7,6 +7,10 @@
 # Node
 node_modules/
 
+# Local docs — not for the public repo
+PRODUCT.md
+README.md
+
 # Font zips and raw design files — not needed in repo
 *.zip
 CabinetGrotesk_Complete/
